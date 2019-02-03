@@ -1,0 +1,8 @@
+---
+name: lttng-ust-ruby-agent
+toplevel_module: LTTNG
+dependencies:
+dev_dependencies:
+  rake: ">=10.3"
+  yard: "~> 0.8.7"
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="xmldefinition.xsd">
+  <!-- 	xsi:schemaLocation="xmldefinition.xsd"> -->
+
+  <xyView id="org.eclipse.linuxtools.tmf.analysis.xml.ui.views.xy1">
+    <head>
+       <analysis id="microsoft.ruby_ust.state.provider" />
+       <label value="Memory Usage" />
+    </head>
+    <entry path="Tasks/Mem/*" >
+      <display type="self" />
+    </entry>
+  </xyView>
+
+  <xyView id="org.eclipse.linuxtools.tmf.analysis.xml.ui.views.xy2">
+    <head>
+      <analysis id="microsoft.ruby_ust.state.provider" />
+      <label value="GC Invocation" />
+    </head>
+    <entry path="Tasks/GC/*" >
+      <display type="self" />
+    </entry>
+  </xyView>
+
+  <stateProvider version="0" id="microsoft.ruby_ust.state.provider">
+    <head>
+      <traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+      <label value="Ruby Analysis" />
+    </head>
+
+
+    <eventHandler eventName="lttng_ust_cyg_profile:func*">
+      <stateChange>
+        <stateAttribute type="constant" value="Tasks" />
+        <stateAttribute type="constant" value="Mem" />
+        <stateAttribute type="eventField" value="context._vtid" />
+        <stateValue type="eventField" value="rss_kb"  />
+      </stateChange>
+      <stateChange>
+        <stateAttribute type="constant" value="Tasks" />
+        <stateAttribute type="constant" value="GC" />
+        <stateAttribute type="eventField" value="context._vtid" />
+        <stateValue type="eventField" value="gc_stat_count"  />
+      </stateChange>
+    </eventHandler>
+
+    <eventHandler eventName="lttng_ruby:event">
+      <stateChange>
+        <stateAttribute type="constant" value="Tasks" />
+        <stateAttribute type="constant" value="Mem" />
+        <stateAttribute type="eventField" value="context._vtid" />
+        <stateValue type="eventField" value="rss_kb"  />
+      </stateChange>
+    </eventHandler>
+
+
+  </stateProvider>
+</tmfxml>
