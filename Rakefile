@@ -3,7 +3,7 @@
 # gem install asciidoctor
 require "rake/extensiontask"
 
-Rake::ExtensionTask.new "lttng_ust_ruby_agent_ext" do |ext|
+Rake::ExtensionTask.new "lttng_ust_ruby_agent" do |ext|
   ext.lib_dir = "lib"
 end
 

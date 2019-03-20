@@ -16,6 +16,7 @@ You need to have the +lttng-ust+ library and headers installed on your system to
 
 == Use
 
+./bin/lttng-ruby ./demos/demo.rb
 
 == Parsing traces
 

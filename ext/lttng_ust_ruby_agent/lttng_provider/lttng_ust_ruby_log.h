@@ -107,7 +107,7 @@ TRACEPOINT_LOGLEVEL(lttng_ruby_log, emerg, TRACE_EMERG)
 #endif /* _TRACEPOINT_LTTNG_UST_RUBY_LOG */
 
 #undef TRACEPOINT_INCLUDE
-#define TRACEPOINT_INCLUDE "./lttng_ust_ruby_log.h"
+#define TRACEPOINT_INCLUDE "./lttng_provider/lttng_ust_ruby_log.h"
 
 /* This part must be outside ifdef protection */
 #include <lttng/tracepoint-event.h>

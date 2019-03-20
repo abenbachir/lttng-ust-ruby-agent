@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xmldefinition.xsd">
+
+  <!-- The state provider assigns states from events -->
+  <stateProvider id="org.eclipse.linuxtools.ruby.ust" version="1">
+    <head>
+      <traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+      <label value="RUBY Analysis" />
+    </head>
+
+    <!-- Event handlers -->
+    <eventHandler eventName="lttng_ruby:newobj">
+      <stateChange>
+        <stateAttribute type="constant" value="OBJS" />
+        <stateAttribute type="eventField" value="obj" />
+        <stateValue type="eventField" value="flags" forcedType="int" />
+      </stateChange>
+    </eventHandler>
+
+    <eventHandler eventName="lttng_ruby:freeobj">
+      <stateChange>
+        <stateAttribute type="constant" value="OBJS" />
+        <stateAttribute type="eventField" value="obj" />
+        <stateValue type="null" />
+      </stateChange>
+    </eventHandler>
+
+  </stateProvider>
+
+  <!-- This is the definition of the time-graph view -->
+  <timeGraphView id="org.eclipse.linuxtools.tmf.analysis.xml.sstimeview">
+    <head>
+      <analysis id="org.eclipse.linuxtools.ruby.ust" />
+      <label value="RUBY UST View" />
+    </head>
+
+    <definedValue name="String" value="5" color="#bdbdbd" /> <!-- light gray -->
+
+    <definedValue name="OBJECT" value="0x01" color="#bdbdbd" />
+    <definedValue name="CLASS" value="0x02" color="#bdbdbd" />
+    <definedValue name="MODULE" value="0x03" color="#bdbdbd" />
+    <definedValue name="FLOAT" value="0x04" color="#bdbdbd" />
+    <definedValue name="STRING" value="0x05" color="#bdbdbd" />
+    <definedValue name="REGEXP" value="0x06" color="#bdbdbd" />
+    <definedValue name="ARRAY" value="0x07" color="#bdbdbd" />
+    <definedValue name="HASH" value="0x08" color="#bdbdbd" />
+    <definedValue name="STRUCT" value="0x09" color="#bdbdbd" />
+    <definedValue name="BIGNUM" value="0x0a" color="#bdbdbd" />
+    <definedValue name="FILE" value="0x0b" color="#bdbdbd" />
+    <definedValue name="DATA" value="0x0c" color="#bdbdbd" />
+    <definedValue name="MATCH" value="0x0d" color="#bdbdbd" />
+    <definedValue name="COMPLEX" value="0x0e" color="#bdbdbd" />
+    <definedValue name="RATIONAL" value="0x0f" color="#bdbdbd" />
+
+    <definedValue name="NIL" value="0x11" color="#bdbdbd" />
+    <definedValue name="TRUE" value="0x12" color="#bdbdbd" />
+    <definedValue name="FALSE" value="0x13" color="#bdbdbd" />
+    <definedValue name="SYMBOL" value="0x14" color="#bdbdbd" />
+    <definedValue name="FIXNUM" value="0x15" color="#bdbdbd" />
+    <definedValue name="UNDEF" value="0x16" color="#bdbdbd" />
+
+    <definedValue name="IMEMO" value="0x1a" color="#bdbdbd" />
+    <definedValue name="NODE" value="0x1b" color="#bdbdbd" />
+    <definedValue name="ICLASS" value="0x1c" color="#bdbdbd" />
+    <definedValue name="ZOMBIE" value="0x1d" color="#bdbdbd" />
+
+    <entry path="OBJS/*" displayText="true">
+      <display type="self" />
+    </entry>
+  </timeGraphView>
+
+</tmfxml>

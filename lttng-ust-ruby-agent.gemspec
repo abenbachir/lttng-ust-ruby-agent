@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files       = Rake::FileList["README.md", "project.yaml", "lib/**/*", "lttng-ust-ruby-agent.gemspec"].to_a
 
   s.homepage    = "https://github.com/abenbachir/lttng-ust-ruby-agent/"
-  s.extensions  = ["ext/lttng_ust_ruby_agent_ext/extconf.rb"]
+  s.extensions  = ["ext/lttng_ust_ruby_agent/extconf.rb"]
 
   s.add_development_dependency "rake", "=12.3.2"
   s.add_development_dependency "yard", "=0.9.16"

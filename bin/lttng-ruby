@@ -1,0 +1,71 @@
+#! /usr/bin/env ruby
+
+# == Synopsis
+#
+# Profiles a Ruby program.
+#
+# == Usage
+#
+# ruby_prof [options] <script.rb> [--] [script-options]"
+#
+# Various options:
+#        run "$ ruby-prof --help" to see them
+#
+# See also the readme "reports" section for the various outputs
+
+# First require ruby-prof
+require 'rubygems'
+begin
+  gem "lttng-ust-ruby-agent"
+  require "lttng-ust-ruby-agent"
+rescue Gem::LoadError
+  puts "Warning: GEM lttng-ust-ruby-agent not installed, tracing will not be available"
+end
+
+# Now setup option parser
+require 'ostruct'
+require 'optparse'
+
+module LttngTracer
+  class Cmd
+    attr_accessor :options
+
+    def initialize
+
+    end
+
+    def run
+      # Get the script we will execute
+      script = ARGV.shift
+      # replace_prog_name
+      $0 = File.expand_path(script)
+
+      puts script
+
+      LTTNG.register_tracepoints()
+      LTTNG.enable_tracepoints()
+      load script
+    end
+  end
+end
+
+
+RubyVM::InstructionSequence.compile_option = {
+  tailcall_optimization: true,
+  trace_instruction: false
+}
+# Parse command line options
+cmd = LttngTracer::Cmd.new
+
+# Install at_exit handler.  It is important that we do this
+# before loading the scripts so our at_exit handler run
+# *after* any other one that will be installed.
+
+at_exit {
+  # Stop profiling
+  # LTTNG.disable_tracepoints()
+
+}
+
+# Now trace some code
+cmd.run

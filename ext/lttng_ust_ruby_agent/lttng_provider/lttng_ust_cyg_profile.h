@@ -38,7 +38,7 @@ TRACEPOINT_EVENT_INSTANCE(lttng_ust_cyg_profile, func_class,
 
 
 #undef TRACEPOINT_INCLUDE
-#define TRACEPOINT_INCLUDE "./lttng_ust_cyg_profile.h"
+#define TRACEPOINT_INCLUDE "./lttng_provider/lttng_ust_cyg_profile.h"
 
 /* This part must be outside ifdef protection */
 #include <lttng/tracepoint-event.h>
